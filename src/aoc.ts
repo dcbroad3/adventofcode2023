@@ -1,4 +1,4 @@
-import * as D from './days';
+import { fnMap } from './days';
 
 const dayStr = process.argv[2];
 const partStr = process.argv[3];
@@ -9,49 +9,12 @@ if (!dayStr || !partStr)
 const day = Number(process.argv[2]);
 const part = Number(process.argv[3]);
 
-function runAoc(day: number, part: number): void {
-  switch (day) {
-    case 1:
-      switch (part) {
-        case 1:
-          return D.day1part1();
-        case 2:
-          return D.day1part2();
-      }
-      break;
-    case 2:
-      switch (part) {
-        case 1:
-          return D.day2part1();
-        case 2:
-          return D.day2part2();
-        default:
-          break;
-      }
-      break;
-    case 3:
-      switch (part) {
-        case 1:
-          return D.day3part1();
-        case 2:
-          return D.day3part2();
-        default:
-          break;
-      }
-      break;
-    case 4:
-      switch (part) {
-        case 1:
-          return D.day4part1();
-        case 2:
-          return D.day4part2();
-        default:
-          break;
-      }
-      break;
-  }
-
-  console.log(`No script available for day ${day} part ${part}.`);
+function runAoc(day: number, part: number): number {
+  const fn = fnMap[day]?.[part];
+  if (fn == null) throw `No script available for day ${day} part ${part}.`;
+  return fn();
 }
 
-runAoc(day, part);
+console.time('Time');
+console.log('Answer:', runAoc(day, part));
+console.timeEnd('Time');

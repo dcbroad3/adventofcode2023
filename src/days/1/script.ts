@@ -21,9 +21,9 @@ function getNumber(value: string): number {
   throw 'Invalid number: ' + value;
 }
 
-function calculateCalibration(includeTextNumbers: boolean): void {
-  const lines = getLines('src/days/1/input.txt');
-  const sum = lines.reduce((s, line) => {
+function calculateCalibration(includeTextNumbers: boolean): number {
+  const lines = getLines(1);
+  return lines.reduce((s, line) => {
     const firstRegex = includeTextNumbers
       ? /.*?(one|two|three|four|five|six|seven|eight|nine|\d)/
       : /.*?(\d)/;
@@ -38,17 +38,14 @@ function calculateCalibration(includeTextNumbers: boolean): void {
     const last = getNumber(lastMatch[1]);
     const value = Number(`${first}${last}`);
     s += value;
-    console.log(line, value, s);
     return s;
   }, 0);
-
-  console.log('Answer:', sum);
 }
 
-export function day1part1(): void {
-  calculateCalibration(false);
+export function day1part1(): number {
+  return calculateCalibration(false);
 }
 
-export function day1part2(): void {
-  calculateCalibration(true);
+export function day1part2(): number {
+  return calculateCalibration(true);
 }

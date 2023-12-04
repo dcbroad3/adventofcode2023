@@ -1,29 +1,26 @@
 import { getLines } from 'src/helpers';
 
-export function day4part1(): void {
-  const lines = getLines('src/days/4/input.txt');
-  const sum = lines.reduce((s, line) => {
-    const [_, cardData] = line.split(': ');
-    const [winningStr, resultStr] = cardData.split(' | ');
-    const winning = new Set(winningStr.split(' ').filter((s) => !!s));
-    const result = resultStr.split(' ').filter((s) => !!s);
-    const won = result.filter((r) => winning.has(r)).length;
+function getWinCount(line: string): number {
+  const [_, cardData] = line.split(': ');
+  const [winningStr, resultStr] = cardData.split(' | ');
+  const winning = new Set(winningStr.split(' ').filter((s) => !!s));
+  const result = resultStr.split(' ').filter((s) => !!s);
+  return result.filter((r) => winning.has(r)).length;
+}
+
+export function day4part1(): number {
+  const lines = getLines(4);
+  return lines.reduce((s, line) => {
+    const won = getWinCount(line);
     if (won) s += Math.pow(2, won - 1);
     return s;
   }, 0);
-
-  console.log('Answer:', sum);
 }
 
-export function day4part2(): void {
-  const lines = getLines('src/days/4/input.txt');
+export function day4part2(): number {
+  const lines = getLines(4);
   const linesWon = lines.reduce((e: Record<number, number>, line, i) => {
-    const [_, cardData] = line.split(': ');
-    const [winningStr, resultStr] = cardData.split(' | ');
-    const winning = new Set(winningStr.split(' ').filter((s) => !!s));
-    const result = resultStr.split(' ').filter((s) => !!s);
-    const won = result.filter((r) => winning.has(r)).length;
-    e[i] = won;
+    e[i] = getWinCount(line);
     return e;
   }, {});
 
@@ -36,5 +33,5 @@ export function day4part2(): void {
     sum += v;
   }
 
-  console.log('Answer:', sum);
+  return sum;
 }

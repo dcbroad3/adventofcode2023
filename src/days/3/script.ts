@@ -5,41 +5,32 @@ function isSymbol(x: string | null | undefined): boolean {
   return isNaN(Number(x));
 }
 
+function checkIndexIsSymbol(
+  lines: string[],
+  lineIndex: number,
+  charIndex: number
+): boolean {
+  return isSymbol(lines[lineIndex]?.[charIndex]);
+}
+
 function indexTouchesSymbol(
   lines: string[],
   lineIndex: number,
   charIndex: number
 ): boolean {
-  // Check above
-  let line = lines[lineIndex - 1];
-  if (line != null) {
-    if (
-      isSymbol(line[charIndex - 1]) ||
-      isSymbol(line[charIndex]) ||
-      isSymbol(line[charIndex + 1])
-    )
-      return true;
-  }
-
-  // Check current row
-  line = lines[lineIndex];
-  if (line != null) {
-    if (isSymbol(line[charIndex - 1]) || isSymbol(line[charIndex + 1]))
-      return true;
-  }
-
-  // Check below
-  line = lines[lineIndex + 1];
-  if (line != null) {
-    if (
-      isSymbol(line[charIndex - 1]) ||
-      isSymbol(line[charIndex]) ||
-      isSymbol(line[charIndex + 1])
-    )
-      return true;
-  }
-
-  return false;
+  return (
+    // Check above
+    checkIndexIsSymbol(lines, lineIndex - 1, charIndex - 1) ||
+    checkIndexIsSymbol(lines, lineIndex - 1, charIndex) ||
+    checkIndexIsSymbol(lines, lineIndex - 1, charIndex + 1) ||
+    // Check current row
+    checkIndexIsSymbol(lines, lineIndex, charIndex - 1) ||
+    checkIndexIsSymbol(lines, lineIndex, charIndex + 1) ||
+    // Check below
+    checkIndexIsSymbol(lines, lineIndex + 1, charIndex - 1) ||
+    checkIndexIsSymbol(lines, lineIndex + 1, charIndex) ||
+    checkIndexIsSymbol(lines, lineIndex + 1, charIndex + 1)
+  );
 }
 
 function checkIndexIsGear(
@@ -73,9 +64,9 @@ function checkIndexTouchesGear(
   checkIndexIsGear(lines, lineIndex + 1, charIndex + 1, gears);
 }
 
-export function day3part1(): void {
-  const lines = getLines('src/days/3/input.txt');
-  const sum = lines.reduce((s, line, lineIndex) => {
+export function day3part1(): number {
+  const lines = getLines(3);
+  return lines.reduce((s, line, lineIndex) => {
     let numStr = '';
     let isPart = false;
     for (let charIndex = 0; charIndex < line.length; charIndex++) {
@@ -100,12 +91,10 @@ export function day3part1(): void {
     }
     return s;
   }, 0);
-
-  console.log('Answer:', sum);
 }
 
-export function day3part2(): void {
-  const lines = getLines('src/days/3/input.txt');
+export function day3part2(): number {
+  const lines = getLines(3);
   const gearMap: Record<string, number[]> = {};
   lines.forEach((line, lineIndex) => {
     let numStr = '';
@@ -134,13 +123,11 @@ export function day3part2(): void {
     }
   });
 
-  const sum = Object.keys(gearMap).reduce((s, g) => {
+  return Object.keys(gearMap).reduce((s, g) => {
     if (gearMap[g].length === 2) {
       const ratio = gearMap[g][0] * gearMap[g][1];
       s += ratio;
     }
     return s;
   }, 0);
-
-  console.log('Answer:', sum);
 }

@@ -1,13 +1,13 @@
 import { getLines } from 'src/helpers';
 
-export function day2part1(): void {
-  const lines = getLines('src/days/2/input.txt');
+export function day2part1(): number {
+  const lines = getLines(2);
   const expected: Record<string, number> = {
     red: 12,
     green: 13,
     blue: 14,
   };
-  const sum = lines.reduce((s, line) => {
+  return lines.reduce((s, line) => {
     const [gameStr, resultStr] = line.split(': ');
     const game = Number(gameStr.substring(5));
     const sets = resultStr.split('; ');
@@ -21,16 +21,13 @@ export function day2part1(): void {
     });
 
     if (valid) s += game;
-    console.log(s, valid, line);
     return s;
   }, 0);
-
-  console.log('Answer: ', sum);
 }
 
-export function day2part2(): void {
-  const lines = getLines('src/days/2/input.txt');
-  const sum = lines.reduce((s, line) => {
+export function day2part2(): number {
+  const lines = getLines(2);
+  return lines.reduce((s, line) => {
     const [_, resultStr] = line.split(': ');
     const sets = resultStr.split('; ');
     const minimum: Record<string, number> = {};
@@ -48,9 +45,6 @@ export function day2part2(): void {
       .map((k) => minimum[k])
       .reduce((p, n) => p * n, 1);
     s += power;
-    console.log(s, power, line);
     return s;
   }, 0);
-
-  console.log('Answer: ', sum);
 }
