@@ -1,4 +1,4 @@
-import fs from 'fs';
+import { getLines } from 'src/helpers';
 
 const numberStr = [
   'zero',
@@ -22,10 +22,8 @@ function getNumber(value: string): number {
 }
 
 function calculateCalibration(includeTextNumbers: boolean): void {
-  const text = fs.readFileSync('src/days/1/input.txt').toString();
-  const lines = text.split('\r\n').filter((l) => !!l);
-  let sum = 0;
-  lines.forEach((line) => {
+  const lines = getLines('src/days/1/input.txt');
+  const sum = lines.reduce((s, line) => {
     const firstRegex = includeTextNumbers
       ? /.*?(one|two|three|four|five|six|seven|eight|nine|\d)/
       : /.*?(\d)/;
@@ -39,9 +37,11 @@ function calculateCalibration(includeTextNumbers: boolean): void {
     const first = getNumber(firstMatch[1]);
     const last = getNumber(lastMatch[1]);
     const value = Number(`${first}${last}`);
-    sum += value;
-    console.log(line, value, sum);
-  });
+    s += value;
+    console.log(line, value, s);
+    return s;
+  }, 0);
+
   console.log('Answer:', sum);
 }
 

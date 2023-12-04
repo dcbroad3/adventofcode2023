@@ -1,4 +1,4 @@
-import { day1part1, day1part2 } from './days/1/script';
+import { day1part1, day1part2, day2part1, day2part2 } from './days';
 
 const dayStr = process.argv[2];
 const partStr = process.argv[3];
@@ -17,6 +17,16 @@ function runAoc(day: number, part: number): void {
           return day1part1();
         case 2:
           return day1part2();
+      }
+      break;
+    case 2:
+      switch (part) {
+        case 1:
+          return day2part1();
+        case 2:
+          return day2part2();
+        default:
+          break;
       }
   }
 
