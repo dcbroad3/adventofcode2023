@@ -39,6 +39,16 @@ function runAoc(day: number, part: number): void {
           break;
       }
       break;
+    case 4:
+      switch (part) {
+        case 1:
+          return D.day4part1();
+        case 2:
+          return D.day4part2();
+        default:
+          break;
+      }
+      break;
   }
 
   console.log(`No script available for day ${day} part ${part}.`);
