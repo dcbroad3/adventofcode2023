@@ -17,7 +17,9 @@ interface Almanac {
   humidityToLocation: Entry[];
 }
 
-const keys: (keyof Omit<Almanac, 'seeds'>)[] = [
+type AlmanacMapKey = keyof Omit<Almanac, 'seeds'>;
+
+const keys: AlmanacMapKey[] = [
   'seedToSoil',
   'soilToFertilizer',
   'fertilizerToWater',
@@ -27,7 +29,7 @@ const keys: (keyof Omit<Almanac, 'seeds'>)[] = [
   'humidityToLocation',
 ];
 
-function getKey(header: string): keyof Omit<Almanac, 'seeds'> {
+function getKey(header: string): AlmanacMapKey {
   switch (header) {
     case 'seed-to-soil map:':
       return 'seedToSoil';
@@ -69,7 +71,7 @@ function getAlmanac(): Almanac {
     temperatureToHumidity: [],
     humidityToLocation: [],
   };
-  let key: keyof Omit<Almanac, 'seeds'> | undefined;
+  let key: AlmanacMapKey | undefined;
   lines.forEach((line, i) => {
     if (!line) return;
 
