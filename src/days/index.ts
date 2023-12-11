@@ -5,6 +5,7 @@ import { day4part1, day4part2 } from './4/script';
 import { day5part1, day5part2 } from './5/script';
 import { day6part1, day6part2 } from './6/script';
 import { day7part1, day7part2 } from './7/script';
+import { day8part1, day8part2 } from './8/script';
 
 export const fnMap: Record<number, Record<number, () => number>> = {
   1: { 1: day1part1, 2: day1part2 },
@@ -14,4 +15,5 @@ export const fnMap: Record<number, Record<number, () => number>> = {
   5: { 1: day5part1, 2: day5part2 },
   6: { 1: day6part1, 2: day6part2 },
   7: { 1: day7part1, 2: day7part2 },
+  8: { 1: day8part1, 2: day8part2 },
 };
