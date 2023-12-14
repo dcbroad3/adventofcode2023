@@ -50,6 +50,7 @@ function getString(value: string[][]): string {
 
 export function day14part2(): number {
   let lines = getLines(14).map((l) => l.split(''));
+  // Initially rotate so original "North" is now "South"
   lines = rotateClockwise(lines);
   lines = rotateClockwise(lines);
 
@@ -57,6 +58,7 @@ export function day14part2(): number {
   let iteration = 0;
   let loop = 0;
   for (let c = 0; c < 1000000000; c++) {
+    // First rotation puts original "North" to the "West"
     for (let i = 0; i < 4; i++) {
       lines = rotateClockwise(lines);
       tiltWest(lines);
@@ -74,6 +76,7 @@ export function day14part2(): number {
   const index = ((1000000000 - loop) % (iteration - loop)) + loop - 1;
   const puzzle = Array.from(map.keys()).find((k) => map.get(k) === index)!;
   let result = puzzle?.split('\r\n').map((l) => l.split(''));
+  // Rotate one last time to put original "North" to the "West" then measure load
   result = rotateClockwise(result);
   return getWestLoad(result);
 }
