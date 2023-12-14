@@ -33,7 +33,7 @@ function rotateClockwise(value: string[][]): string[][] {
   return value.map((r, i) => r.map((c, j) => value[value.length - 1 - j][i]));
 }
 
-function getLoad(value: string[][]): number {
+function getWestLoad(value: string[][]): number {
   return value.reduce((result, row) => {
     const rowValue = row.reduce((w, c, i) => {
       if (c === 'O') return (w += row.length - i);
@@ -75,5 +75,5 @@ export function day14part2(): number {
   const puzzle = Array.from(map.keys()).find((k) => map.get(k) === index)!;
   let result = puzzle?.split('\r\n').map((l) => l.split(''));
   result = rotateClockwise(result);
-  return getLoad(result);
+  return getWestLoad(result);
 }
