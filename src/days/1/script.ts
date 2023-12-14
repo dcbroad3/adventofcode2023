@@ -24,6 +24,7 @@ function getNumber(value: string): number {
 function calculateCalibration(includeTextNumbers: boolean): number {
   const lines = getLines(1);
   return lines.reduce((s, line) => {
+    if (!line) return s;
     const firstRegex = includeTextNumbers
       ? /.*?(one|two|three|four|five|six|seven|eight|nine|\d)/
       : /.*?(\d)/;

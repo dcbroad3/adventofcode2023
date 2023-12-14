@@ -6,6 +6,7 @@ function getMaps(): [number[], Record<string, [string, string]>] {
   const nodes = lines
     .slice(1)
     .reduce((e: Record<string, [string, string]>, l) => {
+      if (!l) return e;
       const [key, mapStr] = l.split(' = ');
       const [left, right] = mapStr.substring(1, 9).split(', ');
       e[key] = [left, right];
