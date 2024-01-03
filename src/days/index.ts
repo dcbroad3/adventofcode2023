@@ -10,6 +10,7 @@ import { day17part1, day17part2 } from './17/script';
 import { day18part1, day18part2 } from './18/script';
 import { day19part1, day19part2 } from './19/script';
 import { day2part1, day2part2 } from './2/script';
+import { day20part1, day20part2 } from './20/script';
 import { day3part1, day3part2 } from './3/script';
 import { day4part1, day4part2 } from './4/script';
 import { day5part1, day5part2 } from './5/script';
@@ -38,4 +39,5 @@ export const fnMap: Record<number, Record<number, () => number>> = {
   17: { 1: day17part1, 2: day17part2 },
   18: { 1: day18part1, 2: day18part2 },
   19: { 1: day19part1, 2: day19part2 },
+  20: { 1: day20part1, 2: day20part2 },
 };

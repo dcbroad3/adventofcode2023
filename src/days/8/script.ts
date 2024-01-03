@@ -1,4 +1,4 @@
-import { getLines } from 'src/helpers';
+import { getLcm, getLines } from 'src/helpers';
 
 function getMaps(): [number[], Record<string, [string, string]>] {
   const lines = getLines(8);
@@ -13,19 +13,6 @@ function getMaps(): [number[], Record<string, [string, string]>] {
       return e;
     }, {});
   return [directions, nodes];
-}
-
-function getHcf(a: number, b: number): number {
-  const max = a > b ? a : b;
-  for (let i = max; i > 0; i--) {
-    if (a % i === 0 && b % i === 0) return i;
-  }
-
-  return -1;
-}
-
-function getLcm(a: number, b: number): number {
-  return (a * b) / getHcf(a, b);
 }
 
 export function day8part1(): number {
