@@ -105,7 +105,6 @@ export function day17part1(): number {
     const { r, c, dc, dr, n } = current.value;
 
     if (r === grid.length - 1 && c === grid[0].length - 1) {
-      console.log(pq, [hl, r, c, dc, dr, n]);
       return hl;
     }
     if (r < 0 || r >= grid.length || c < 0 || c >= grid[0].length) continue;
@@ -150,10 +149,7 @@ export function day17part2(): number {
     const hl = current.key;
     const { r, c, dc, dr, n } = current.value;
 
-    if (r === grid.length - 1 && c === grid[0].length - 1) {
-      console.log(pq, [hl, r, c, dc, dr, n]);
-      return hl;
-    }
+    if (r === grid.length - 1 && c === grid[0].length - 1) return hl;
     if (r < 0 || r >= grid.length || c < 0 || c >= grid[0].length) continue;
     const key = [r, c, dc, dr, n].join(',');
     if (seen.has(key)) continue;
