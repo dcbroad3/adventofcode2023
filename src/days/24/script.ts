@@ -36,6 +36,8 @@ function getHailstones(): Hailstone[] {
   return getLines(24).map((l) => new Hailstone(l));
 }
 
+// Based on: https://github.com/yongjun21/advent-of-code/blob/master/2023/day24.js
+
 export function day24part1(): number {
   const hailstones = getHailstones();
   const min = 200000000000000;

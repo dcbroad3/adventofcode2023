@@ -15,6 +15,7 @@ import { day21part1, day21part2 } from './21/script';
 import { day22part1, day22part2 } from './22/script';
 import { day23part1, day23part2 } from './23/script';
 import { day24part1, day24part2 } from './24/script';
+import { day25part1 } from './25/script';
 import { day3part1, day3part2 } from './3/script';
 import { day4part1, day4part2 } from './4/script';
 import { day5part1, day5part2 } from './5/script';
@@ -48,4 +49,5 @@ export const fnMap: Record<number, Record<number, () => number>> = {
   22: { 1: day22part1, 2: day22part2 },
   23: { 1: day23part1, 2: day23part2 },
   24: { 1: day24part1, 2: day24part2 },
+  25: { 1: day25part1 },
 };
